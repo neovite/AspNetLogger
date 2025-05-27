@@ -22,7 +22,7 @@ namespace logger.Middleware
             }
             catch(Exception ex) 
             {
-                Console.WriteLine("im runnng");
+                Console.WriteLine("HIT");
                 var traceId = Guid.NewGuid();
                 _logger.LogError(ex, $"Error occure while processing the request, TraceId : {traceId}," +
                     $" Message : {ex.Message}, StackTrace: {ex.StackTrace}");
@@ -34,7 +34,7 @@ namespace logger.Middleware
                 {
                     traceId,
                     message = "An internal server error occurred.",
-                    details = ex.Message // You can hide this in prod
+                    details = ex.Message // HIDE ME
                 };
 
                 var json = System.Text.Json.JsonSerializer.Serialize(errorResponse);

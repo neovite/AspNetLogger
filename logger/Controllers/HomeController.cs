@@ -16,12 +16,12 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        throw new Exception("just a test");
         return View();
     }
 
     public IActionResult Privacy()
     {
+        throw new Exception("The test");
         return View();
     }
 
@@ -30,4 +30,9 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    public IActionResult CrashTest()
+    {
+        throw new InvalidOperationException("This is a test exception from CrashTest action.");
+    }
+
 }
