@@ -6,7 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 //DI
 {
-builder.Services.AddTransient<GlobalExceptionHandlerMiddleware>();
+    //Global exception
+    builder.Services.AddTransient<GlobalExceptionHandlerMiddleware>();
 }
 // Serilog Configuration
 {
@@ -36,9 +37,11 @@ app.UseRouting();
 
 
 //Middlewares
-// Global Exception Pipline
 {
+    // Global Exception Middleware Pipline
     app.UseMiddleware<GlobalExceptionHandlerMiddleware>();
+    //Serilog Request Middleware
+    app.UseSerilogRequestLogging();
 }
 
 
