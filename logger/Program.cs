@@ -1,6 +1,17 @@
 using logger.Middleware;
 using Serilog;
+
+// for logging in program.cs
+Log.Logger = new LoggerConfiguration()
+    .WriteTo.Console()
+    .CreateLogger();
+
+try 
+{
+
+
 var builder = WebApplication.CreateBuilder(args);
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -52,3 +63,13 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
+
+}
+catch(Exception ex)
+{
+    Log.Fatal(ex, "Server terminated unexpextedly");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
